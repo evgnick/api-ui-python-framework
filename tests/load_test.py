@@ -1,5 +1,3 @@
-import time
-
 from config.ui_config import UiConfig
 from pages.login_page import LoginPage
 from utils.login_helper import LoginHelper
