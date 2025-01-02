@@ -13,7 +13,7 @@ def configure_chrome_options(chrome_options_list):
     return options
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture(scope="function",autouse=True)
 def driver(request):
     chrome_options = UiConfig.CHROME_OPTIONS
     options = configure_chrome_options(chrome_options)
