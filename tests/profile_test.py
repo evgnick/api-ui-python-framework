@@ -1,4 +1,4 @@
-from utils.login_helper import LoginHelper
+from helpers.login_helper import LoginHelper
 
 
 class TestProfile:

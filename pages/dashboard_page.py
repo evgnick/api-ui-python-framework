@@ -1,8 +1,8 @@
 from base.base_page import BasePage
-from base.navigation_menu import NaMenu
+from base.navigation_menu import NavigationMenu
 
 
-class DashboardPage(BasePage, NaMenu):
+class DashboardPage(BasePage, NavigationMenu):
 
     def __init__(self, driver):
         super().__init__(driver)
