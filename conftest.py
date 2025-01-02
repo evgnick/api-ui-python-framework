@@ -18,6 +18,6 @@ def driver(request):
     chrome_options = UiConfig.CHROME_OPTIONS
     options = configure_chrome_options(chrome_options)
     driver = webdriver.Chrome(options=options)
-    # request.cls.driver = driver
+    request.cls.driver = driver
     yield driver
     driver.quit()

@@ -12,3 +12,4 @@ class BasePage:
 
     def open(self):
         self.driver.get(UiConfig.UI_HOST)
+        return self

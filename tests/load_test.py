@@ -1,13 +1,19 @@
+import time
+
 from config.ui_config import UiConfig
-from base.base_test import BaseTest
+from pages.login_page import LoginPage
+from utils.login_helper import LoginHelper
 
 
-class TestLoad(BaseTest):
+class TestLoad:
 
     def test_load(self):
-        self.login_page.open()
-        self.login_page.enter_login(UiConfig.USERNAME)
-        print(UiConfig.USERNAME)
-        print(UiConfig.PASSWORD)
-        self.login_page.enter_password(UiConfig.PASSWORD)
-        self.login_page.click_submit_button()
+        self.login_page = (LoginPage(self.driver)
+                           .open()
+                           .login(UiConfig.USERNAME, UiConfig.PASSWORD)
+                           .get_url())
+
+    def test_load_2(self):
+        self.dashboard_page = (LoginHelper(self.driver)
+                               .login_to_application()
+                               .get_url())
