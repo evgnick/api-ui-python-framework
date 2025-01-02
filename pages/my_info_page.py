@@ -2,6 +2,8 @@ from base.base_page import BasePage
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver import Keys
 
+from conftest import driver
+
 
 class MyInfoPage(BasePage):
 
@@ -26,7 +28,5 @@ class MyInfoPage(BasePage):
         self.wait.until(ec.element_to_be_clickable(self._SAVE_BUTTON)).click()
         return self
 
-    def is_changes_saved(self):
-        self.wait.until(ec.invisibility_of_element_located(self._SPINNER))
-        self.wait.until(ec.visibility_of_element_located(self._FIRST_NAME_FIELD))
-        self.wait.until(ec.text_to_be_present_in_element_value(self._FIRST_NAME_FIELD, self.name))
+    def get_first_name(self):
+        return self.wait.until(ec.visibility_of_element_located(self._FIRST_NAME_FIELD)).get_attribute("value")
