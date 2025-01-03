@@ -8,9 +8,9 @@ class LoginHelper:
         self.driver = driver
 
     def login_to_application(self):
-        dashboard_page = (LoginPage(self.driver)
-                          .open()
-                          .enter_login(UiConfig.USERNAME)
-                          .enter_password(UiConfig.PASSWORD)
-                          .click_submit_button())
-        return dashboard_page
+        products_page = (LoginPage(self.driver)
+                         .open()
+                         .enter_login(UiConfig.USERNAME)
+                         .enter_password(UiConfig.PASSWORD)
+                         .click_submit_button())
+        return products_page

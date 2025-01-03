@@ -15,3 +15,4 @@ class BasePage:
         with allure.step(f"Open page: {UiConfig.UI_HOST}"):
             self.driver.get(UiConfig.UI_HOST)
             return self
+

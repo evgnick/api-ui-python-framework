@@ -1,14 +1,14 @@
 import allure
 from base.base_page import BasePage
-from pages.dashboard_page import DashboardPage
+from pages.products_page import ProductsPage
 from selenium.webdriver.support import expected_conditions as ec
 
 
 class LoginPage(BasePage):
 
-    _USERNAME_FIELD = ("xpath", "//input[@name='username']")
+    _USERNAME_FIELD = ("xpath", "//input[@name='user-name']")
     _PASSWORD_FIELD = ("xpath", "//input[@name='password']")
-    _SUBMIT_BUTTON = ("xpath", "//button[@type='submit']")
+    _SUBMIT_BUTTON = ("xpath", "//input[@id='login-button']")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -23,7 +23,7 @@ class LoginPage(BasePage):
             self.wait.until(ec.element_to_be_clickable(self._PASSWORD_FIELD)).send_keys(password)
             return self
 
-    @allure.step("Click submit button")
+    @allure.step("Click login button")
     def click_submit_button(self):
         self.wait.until(ec.element_to_be_clickable(self._SUBMIT_BUTTON)).click()
-        return DashboardPage(self.driver)
+        return ProductsPage(self.driver)
