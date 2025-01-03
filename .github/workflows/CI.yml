@@ -54,8 +54,10 @@ jobs:
 
       - name: Copy history from gh-pages to allure-results
         run: |
-            sudo mkdir -p allure-results/history  # Создает директорию для истории Allure
-            sudo cp -R ./.github/gh-pages/history/* allure-results/history/
+          sudo mkdir -p allure-results/history  # Создает директорию для истории Allure
+          if [ -d "./.github/gh-pages/history" ]; then
+          cp -r ./.github/gh-pages/history/* allure-results/history/
+          fi
 
       - name: Generate Allure report
         run: |
