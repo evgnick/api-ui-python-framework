@@ -8,12 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      CHROME_OPTIONS: "--remote-allow-origins=*;--disable-gpu;--no-sandbox;--disable-dev-shm-usage;--headless=new;--window-size=1920,1080"
-      UI_HOST: "https://www.saucedemo.com/"
-      ADMIN_USERNAME: ${{ secrets.USERNAME }}
-      ADMIN_PASSWORD: ${{ secrets.PASSWORD }}
-      CI_TOKEN: ${{ secrets.CI_TOKEN}}
 
     steps:
       - name: Git clone
@@ -43,6 +37,11 @@ jobs:
           sudo ln -s /opt/allure/bin/allure /usr/local/bin/allure
 
       - name: Run tests
+        env:
+          CHROME_OPTIONS: "--remote-allow-origins=*;--disable-gpu;--no-sandbox;--disable-dev-shm-usage;--headless=new;--window-size=1920,1080"
+          UI_HOST: "https://www.saucedemo.com/"
+          ADMIN_USERNAME: ${{ secrets.USERNAME }}
+          ADMIN_PASSWORD: ${{ secrets.PASSWORD }}
         run: |
           python -m pytest --alluredir=allure-results -sv
 
@@ -75,6 +74,8 @@ jobs:
           sudo cp -R $latest_report docs/allure-report
 
       - name: Deploy to GitHub Pages
+        env:
+          CI_TOKEN: ${{ secrets.CI_TOKEN}}
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
           token: ${{ secrets.CI_TOKEN }}
