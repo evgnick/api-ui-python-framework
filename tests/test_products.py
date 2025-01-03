@@ -16,4 +16,4 @@ class TestProductsItem:
                              .login_to_application()
                              .get_title())
 
-        assert self.actual_title == "Swag Labs1"
+        assert self.actual_title == "Swag Labs"
