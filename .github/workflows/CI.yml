@@ -57,13 +57,13 @@ jobs:
           PUBLISH_BRANCH: gh-pages
           publish_dir: allure-history
 
-      - name: Save GitHub run number as artifact
-        run: |
-          echo "${{ github.run_number }}" > run_number.txt
-        continue-on-error: true
+      - name: Save run number as artifact
+        run: echo "${{ github.run_number }}" > run_number.txt
+        if: success()
 
-      - name: Upload run number artifact
+      - name: Upload run number as artifact
         uses: actions/upload-artifact@v3
         with:
           name: run_number
           path: run_number.txt
+        if: success()
