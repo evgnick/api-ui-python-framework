@@ -68,7 +68,7 @@ jobs:
       - name: Update GitHub Pages with the latest report
         run: |
           latest_report=$(ls -d docs/allure-report-history/allure-report-* | sort -r | head -n 1)
-          ln -s $latest_report docs/allure-report
+          sudo ln -s $latest_report docs/allure-report
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.5
