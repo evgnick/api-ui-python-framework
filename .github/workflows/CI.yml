@@ -17,11 +17,11 @@ jobs:
         with:
           python-version: '3.12'
 
-#      - name: Checkout (copy) gh-pages repository to GitHub runner
-#        uses: actions/checkout@v2
-#        with:
-#          ref: gh-pages
-#          path: ./.github/gh-pages
+      #      - name: Checkout (copy) gh-pages repository to GitHub runner
+      #        uses: actions/checkout@v2
+      #        with:
+      #          ref: gh-pages
+      #          path: ./.github/gh-pages
 
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -41,33 +41,18 @@ jobs:
           ADMIN_PASSWORD: ${{ secrets.PASSWORD }}
         run: |
           python -m pytest -sv --alluredir=./.github/gh-pages/allure-results
-          sudo ls .github/gh-pages
 
-#      - name: Get Allure history
-#        uses: actions/checkout@v4
-#        if: always()
-#        continue-on-error: true
-#        with:
-#          ref: gh-pages
-#          path: gh-pages
-#
-#      - name: Allure Report action
-#        uses: simple-elf/allure-report-action@master
-#        if: always()
-#        id: allure-report
-#        with:
-#          allure_results: target/allure-results
-#          gh_pages: gh-pages
-#          allure_report: allure-report
-#          allure_history: allure-history
-#
-#      - name: Deploy report to Github Pages
-#        if: always()
-#        uses: peaceiris/actions-gh-pages@v2
-#        env:
-#          PERSONAL_TOKEN: ${{ secrets.CI_TOKEN }}
-#          PUBLISH_BRANCH: gh-pages
-#          PUBLISH_DIR: allure-history
+      - name: Check if allure-results are created
+        run: |
+          ls -l .github/gh-pages/allure-results
+
+      - name: Commit and push results to gh-pages
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .github/gh-pages/allure-results
+          git commit -m "Add Allure test results"
+          git push origin gh-pages
 
 #      - name: Copy history from gh-pages to allure-results
 #        run: |
