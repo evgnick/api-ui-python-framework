@@ -1,2 +1,2 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Fri Jan 03 18:11:45 UTC 2025","Fri Jan 03 18:11:47 UTC 2025","2066","tests","test_products","TestProductsItem","","","Go to products",""
+"passed","Fri Jan 03 18:14:12 UTC 2025","Fri Jan 03 18:14:12 UTC 2025","551","tests","test_products","TestProductsItem","","","Go to products",""
