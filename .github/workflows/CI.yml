@@ -66,4 +66,3 @@ jobs:
         with:
           name: run_number
           path: run_number.txt
-        if: success()
