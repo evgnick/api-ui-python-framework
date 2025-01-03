@@ -29,12 +29,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Checkout gh-pages branch
-        run: |
-          git fetch origin gh-pages
-          git checkout gh-pages || git checkout --orphan gh-pages
-          git reset --hard
-
       - name: Install Allure Commandline
         run: |
           curl -o allure.tgz -L https://github.com/allure-framework/allure2/releases/download/2.18.1/allure-2.18.1.tgz
@@ -55,6 +49,12 @@ jobs:
       - name: Generate Allure report
         run: |
           allure generate allure-results --clean -o allure-report
+
+      - name: Checkout gh-pages branch
+        run: |
+          git fetch origin gh-pages
+          git checkout gh-pages || git checkout --orphan gh-pages
+          git reset --hard
 
       - name: Upload Allure report to GitHub Pages
         run: |
