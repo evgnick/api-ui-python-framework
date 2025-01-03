@@ -65,7 +65,10 @@ jobs:
 
       - name: Update Allure history
         run: |
-          sudo cp -R allure-report/history/* ./.github/gh-pages/history/
+          sudo mkdir -p ./.github/gh-pages/history  # Создаем папку, если она отсутствует
+          if [ -d "allure-report/history" ]; then
+            sudo cp -R allure-report/history/* ./.github/gh-pages/history/
+          fi
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.5
