@@ -20,13 +20,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-#      - name: Install Allure Commandline
-#        run: |
-#          curl -o allure.tgz -L https://github.com/allure-framework/allure2/releases/download/2.18.1/allure-2.18.1.tgz
-#          tar -zxvf allure.tgz
-#          sudo mv allure-2.18.1 /opt/allure
-#          sudo ln -s /opt/allure/bin/allure /usr/local/bin/allure
-
       - name: Run tests
         env:
           CHROME_OPTIONS: "--remote-allow-origins=*;--disable-gpu;--no-sandbox;--disable-dev-shm-usage;--headless=new;--window-size=1920,1080"
