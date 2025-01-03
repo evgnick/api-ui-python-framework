@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","532","Go to products","tests","Fri Jan 03 19:21:32 GMT 2025","passed","Fri Jan 03 19:21:33 GMT 2025","TestProductsItem","test_products","",""
