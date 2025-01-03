@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v5.2.0
@@ -30,7 +30,7 @@ jobs:
           pytest -sv --alluredir=allure-results --disable-warnings -q
 
       - name: Get Allure history
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v3
         if: always()
         continue-on-error: true
         with:
@@ -38,7 +38,7 @@ jobs:
           path: gh-pages
 
       - name: Generate allure report
-        uses: simple-elf/allure-report-action@master
+        uses: simple-elf/allure-report-action@v1.7
         if: always()
         with:
           allure_results: allure-results
@@ -47,13 +47,12 @@ jobs:
           gh_pages: gh-pages
           ref: gh-pages
           path: gh-pages
-          keep_reports: 30
+          keep_reports: 60
 
       - name: Commit allure_report to Github Pages
         if: always()
-        uses: peaceiris/actions-gh-pages@v4.0.0
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.CI_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           publish_dir: allure-history
-          force_orphan: true
