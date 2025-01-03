@@ -64,12 +64,11 @@ jobs:
             sudo mkdir -p docs/allure-report-history
             sudo mv allure-report docs/allure-report-history/allure-report-$date
           fi
-#          sudo mv allure-report docs/allure-report-$date
 
-#      - name: Copy history to gh-pages
-#        run: |
-#          sudo mkdir -p ./.github/gh-pages/history
-#          sudo cp -r allure-report/history/* ./.github/gh-pages/history/
+      - name: Update GitHub Pages with the latest report
+        run: |
+          latest_report=$(ls -d docs/allure-report-history/allure-report-* | sort -r | head -n 1)
+          ln -s $latest_report docs/allure-report
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.5
