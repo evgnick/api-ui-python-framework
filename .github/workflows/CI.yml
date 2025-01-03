@@ -57,10 +57,15 @@ jobs:
         run: |
           allure generate allure-results --clean -o allure-report
 
-      - name: Copy history to gh-pages
+      - name: Move Allure report to history
         run: |
-          sudo mkdir -p ./.github/gh-pages/history
-          sudo cp -r allure-report/history/* ./.github/gh-pages/history/
+          date=$(date +"%Y-%m-%d_%H-%M-%S")
+          sudo mv allure-report docs/allure-report-$date
+
+#      - name: Copy history to gh-pages
+#        run: |
+#          sudo mkdir -p ./.github/gh-pages/history
+#          sudo cp -r allure-report/history/* ./.github/gh-pages/history/
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.5
