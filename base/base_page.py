@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -11,5 +12,6 @@ class BasePage:
         self.wait = WebDriverWait(self.driver, 15)
 
     def open(self):
-        self.driver.get(UiConfig.UI_HOST)
-        return self
+        with allure.step(f"Open page: {UiConfig.UI_HOST}"):
+            self.driver.get(UiConfig.UI_HOST)
+            return self
