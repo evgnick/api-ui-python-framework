@@ -16,7 +16,7 @@ jobs:
         run: |
           TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
 
-          REPORT_LINK="https://evgnick.github.io/api-ui-python-framework/${{ github.event.workflow_run.run_numberr }}/"
+          REPORT_LINK="https://evgnick.github.io/api-ui-python-framework/${{ github.event.workflow_run.run_number }}/"
 
           ESCAPED_TIMESTAMP=$(echo "$TIMESTAMP" | sed 's|-|\\-|g; s|:|\\:|g; s|\.|\\.|g; s|_|\\_|g; s|/|\\/|g')
           ESCAPED_REPORT_LINK=$(echo "$REPORT_LINK" | sed 's|-|\\-|g; s|\.|\\.|g; s|_|\\_|g; s|:|\\:|g; s|/|\\/|g')
