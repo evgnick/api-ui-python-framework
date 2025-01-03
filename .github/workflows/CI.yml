@@ -61,9 +61,14 @@ jobs:
         if: always()
         run: |
           TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
+
           REPORT_LINK="https://evgnick.github.io/api-ui-python-framework/${{ github.run_number }}/"
-          MESSAGE="📝 Новый отчет Allure: [открыть отчет](${REPORT_LINK})%0A📅 Дата и время: ${TIMESTAMP}%0A⚙️ Сборка: #${{ github.run_number }}"
-          
+
+          ESCAPED_TIMESTAMP=$(echo "$TIMESTAMP" | sed 's/\-/\\-/g; s/\:/\\:/g; s/\./\\./g; s/_/\\_/g')
+          ESCAPED_REPORT_LINK=$(echo "$REPORT_LINK" | sed 's/\-/\\-/g; s/\./\\./g; s/_/\\_/g; s/\:/\\:/g; s/\//\\//g')
+
+          MESSAGE="📝 Новый отчет Allure: [открыть отчет](${ESCAPED_REPORT_LINK})%0A📅 Дата и время: ${ESCAPED_TIMESTAMP}%0A⚙️ Сборка: #${{ github.run_number }}"
+
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
             -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
             -d text="${MESSAGE}" \
