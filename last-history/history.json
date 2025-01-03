@@ -1,0 +1,1 @@
+{"75d4879875c2d4a3c49de1998780cb31":{"statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1},"items":[{"uid":"d41ee023b18fba86","reportUrl":"https://evgnick.github.io/api-ui-python-framework/73//#testresult/d41ee023b18fba86","status":"passed","time":{"start":1735931966474,"stop":1735931967133,"duration":659}}]}}
