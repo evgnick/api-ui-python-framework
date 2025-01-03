@@ -43,12 +43,12 @@ jobs:
           ADMIN_USERNAME: ${{ secrets.USERNAME }}
           ADMIN_PASSWORD: ${{ secrets.PASSWORD }}
         run: |
-          python -m pytest --alluredir=allure-results -sv
+          python -m pytest -sv --alluredir=allure-results
 
       - name: Copy history from gh-pages to allure-results
         run: |
           sudo mkdir -p history
-          sudo mkdir -p allure-results/history/
+          sudo mkdir -p allure-results/history
           sudo cp -R ./.github/gh-pages/history/* allure-results/history/
 
       - name: Generate Allure report
@@ -65,4 +65,4 @@ jobs:
           token: ${{ secrets.CI_TOKEN }}
           branch: gh-pages
           folder: allure-report
-          clean: false
+          clean: true
