@@ -56,3 +56,4 @@ jobs:
           github_token: ${{ secrets.CI_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           publish_dir: allure-history
+          force_orphan: true
