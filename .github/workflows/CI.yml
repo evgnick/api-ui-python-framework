@@ -59,9 +59,12 @@ jobs:
 
       - name: Move Allure report to history
         run: |
+          if [ ! -d "docs" ]; then
+            sudo mkdir -p docs
+          fi
           date=$(date +"%Y-%m-%d_%H-%M-%S")
           if [ ! -d "docs/allure-report-history" ]; then
-            sudo mkdir -p docs/allure-report-history
+           sudo mkdir -p docs/allure-report-history
           fi
           sudo mv allure-report docs/allure-report-history/allure-report-$date
 
