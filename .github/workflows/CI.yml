@@ -56,28 +56,28 @@ jobs:
         run: |
           allure generate allure-results --clean -o allure-report
 
-      - name: Move Allure report to history
-        run: |
-          if [ ! -d "docs" ]; then
-            sudo mkdir -p docs
-          fi
-          date=$(date +"%Y-%m-%d_%H-%M-%S")
-          if [ ! -d "docs/allure-report-history" ]; then
-           sudo mkdir -p docs/allure-report-history
-          fi
-          sudo mv allure-report docs/allure-report-history/allure-report-$date
-
-      - name: Update GitHub Pages with the latest report
-        run: |
-          sudo rm -rf docs/allure-report
-          latest_report=$(ls -d docs/allure-report-history/allure-report-* | sort -r | head -n 1)
-          sudo cp -R $latest_report docs/allure-report
+#      - name: Move Allure report to history
+#        run: |
+#          if [ ! -d "docs" ]; then
+#            sudo mkdir -p docs
+#          fi
+#          date=$(date +"%Y-%m-%d_%H-%M-%S")
+#          if [ ! -d "docs/allure-report-history" ]; then
+#           sudo mkdir -p docs/allure-report-history
+#          fi
+#          sudo mv allure-report docs/allure-report-history/allure-report-$date
+#
+#      - name: Update GitHub Pages with the latest report
+#        run: |
+#          sudo rm -rf docs/allure-report
+#          latest_report=$(ls -d docs/allure-report-history/allure-report-* | sort -r | head -n 1)
+#          sudo cp -R $latest_report docs/allure-report
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
           token: ${{ secrets.CI_TOKEN }}
           branch: gh-pages
-          folder: docs
+          folder: allure-report
           clean: false
 
