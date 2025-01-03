@@ -7,25 +7,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Git clone
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: Clone repository
+        uses: actions/checkout@v4.2.2
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5.2.0
         with:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Install Allure Commandline
         run: |
-          curl -o allure.tgz -L https://github.com/allure-framework/allure2/releases/download/2.18.1/allure-2.18.1.tgz
-          tar -zxvf allure.tgz
-          sudo mv allure-2.18.1 /opt/allure
-          sudo ln -s /opt/allure/bin/allure /usr/local/bin/allure
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+#      - name: Install Allure Commandline
+#        run: |
+#          curl -o allure.tgz -L https://github.com/allure-framework/allure2/releases/download/2.18.1/allure-2.18.1.tgz
+#          tar -zxvf allure.tgz
+#          sudo mv allure-2.18.1 /opt/allure
+#          sudo ln -s /opt/allure/bin/allure /usr/local/bin/allure
 
       - name: Run tests
         env:
@@ -34,7 +34,7 @@ jobs:
           ADMIN_USERNAME: ${{ secrets.USERNAME }}
           ADMIN_PASSWORD: ${{ secrets.PASSWORD }}
         run: |
-          python -m pytest -sv --alluredir=allure-results
+          pytest -sv --alluredir=allure-results --disable-warnings -q
 
       - name: Get Allure history
         uses: actions/checkout@v4.2.2
