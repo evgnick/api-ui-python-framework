@@ -49,10 +49,6 @@ jobs:
           path: gh-pages
           keep_reports: 60
 
-      - name: Wait before deploy
-        if: always()
-        run: sleep 60
-
       - name: Commit allure_report to Github Pages
         uses: peaceiris/actions-gh-pages@v4
         if: always()
