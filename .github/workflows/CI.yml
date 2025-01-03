@@ -41,6 +41,7 @@ jobs:
           ADMIN_PASSWORD: ${{ secrets.PASSWORD }}
         run: |
           python -m pytest -sv --alluredir=./.github/gh-pages/allure-results
+          sudo ls .github/gh-pages
 
 #      - name: Get Allure history
 #        uses: actions/checkout@v4
