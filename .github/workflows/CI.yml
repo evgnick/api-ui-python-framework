@@ -60,7 +60,11 @@ jobs:
       - name: Move Allure report to history
         run: |
           date=$(date +"%Y-%m-%d_%H-%M-%S")
-          sudo mv allure-report docs/allure-report-$date
+          if [ ! -d "docs/allure-report-history" ]; then
+            sudo mkdir -p docs/allure-report-history
+            sudo mv allure-report docs/allure-report-history/allure-report-$date
+          fi
+#          sudo mv allure-report docs/allure-report-$date
 
 #      - name: Copy history to gh-pages
 #        run: |
