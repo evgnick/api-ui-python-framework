@@ -16,6 +16,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: run_number
+          path: .
 
       - name: Extract run number
         id: extract_run_number
