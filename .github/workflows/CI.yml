@@ -67,6 +67,7 @@ jobs:
 
       - name: Update GitHub Pages with the latest report
         run: |
+          sudo rm -rf docs/allure-report
           latest_report=$(ls -d docs/allure-report-history/allure-report-* | sort -r | head -n 1)
           sudo ln -s $latest_report docs/allure-report
 
