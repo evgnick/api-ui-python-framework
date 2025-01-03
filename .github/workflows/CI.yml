@@ -28,6 +28,12 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Checkout (copy) gh-pages repository to GitHub runner
+        uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+          path: ./.github/gh-pages
+
       - name: Install Allure Commandline
         run: |
           curl -o allure.tgz -L https://github.com/allure-framework/allure2/releases/download/2.18.1/allure-2.18.1.tgz
@@ -55,6 +61,8 @@ jobs:
           mv allure-report/* docs/allure-report/
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
+          git config --global credential.helper "store"
+          echo "https://x-access-token:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
           git add docs/allure-report/
           git commit -m 'Update Allure report'
           git push origin gh-pages
