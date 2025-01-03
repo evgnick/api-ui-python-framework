@@ -44,31 +44,20 @@ jobs:
 
       - name: Run tests
         run: |
-          python -m pytest --alluredir=allure-results -sv
-
-      - name: Upload Allure results as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-results
-          path: allure-results/
-
-      - name: Copy history from gh-pages to allure-results
-        run: |
-          sudo mkdir -p allure-results/history  # Создает директорию для истории Allure
+          sudo mkdir -p allure-results/history
           if [ -d "./.github/gh-pages/history" ]; then
-          sudo cp -r ./.github/gh-pages/history/* allure-results/history/
+            sudo cp -r ./.github/gh-pages/history allure-results/
           fi
+          python -m pytest --alluredir=allure-results -sv
 
       - name: Generate Allure report
         run: |
           allure generate allure-results --clean -o allure-report
 
-      - name: Update Allure history
+      - name: Copy history to gh-pages
         run: |
-          sudo mkdir -p ./.github/gh-pages/history  # Создаем папку, если она отсутствует
-          if [ -d "allure-report/history" ]; then
-            sudo cp -R allure-report/history/* ./.github/gh-pages/history/
-          fi
+          sudo mkdir -p ./.github/gh-pages/history
+          sudo cp -r allure-report/history/* ./.github/gh-pages/history/
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.5
