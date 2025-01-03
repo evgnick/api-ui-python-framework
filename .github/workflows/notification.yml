@@ -12,6 +12,17 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
+      - name: Download run number artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: run_number
+
+      - name: Read run number from artifact
+        id: read_run_number
+        run: |
+          RUN_NUMBER=$(cat run_number.txt)
+          echo "RUN_NUMBER=${RUN_NUMBER}" >> $GITHUB_ENV
+
       - name: Send Telegram Notification
         run: |
           TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
