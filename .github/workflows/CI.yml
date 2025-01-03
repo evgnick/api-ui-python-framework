@@ -13,7 +13,7 @@ jobs:
       UI_HOST: "https://www.saucedemo.com/"
       ADMIN_USERNAME: ${{ secrets.USERNAME }}
       ADMIN_PASSWORD: ${{ secrets.PASSWORD }}
-      CI_TOKEN: ${{ secrets.CI_TOKEN }}
+      CI_TOKEN: ${{ secrets.CI_TOKEN}}
 
     steps:
       - name: Git clone
